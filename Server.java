@@ -50,7 +50,7 @@ public class Server
     {
         switch(richiesta)
         {
-            case "L": return registraUtente(informazioni);
+            case "L": return "S"+registraUtente(informazioni);
             default: throw new Exception("Operazione non valida");
         }
     }
