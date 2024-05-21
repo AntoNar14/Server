@@ -54,7 +54,7 @@ public class Server
         {
             case "L": return "S"+registraUtente(informazioni);
             case "I": return inoltroMessaggio(informazioni);
-
+            default: return "E";
         }
     }
 
