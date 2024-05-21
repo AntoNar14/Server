@@ -1,5 +1,6 @@
 import java.net.*;
 import java.io.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ public class Server
 {
     // Variabili globali del server necessarie ad elaborare la risposta
     static ArrayList<Utente> listaUtentiCollegati=new ArrayList<Utente>();
+    static ArrayList<Messaggio> listaMessaggiInoltrati=new ArrayList<Messaggio>();
     public static void main(String args[])
     {
         ServerSocket ss;
@@ -51,8 +53,27 @@ public class Server
         switch(richiesta)
         {
             case "L": return "S"+registraUtente(informazioni);
-            default: throw new Exception("Operazione non valida");
+            case "I": return inoltroMessaggio(informazioni);
+
         }
+    }
+
+    public static String inoltroMessaggio(String informazioni)
+    {
+        String idMittente=informazioni.substring(0,10);
+        String messaggio=informazioni.substring(11);
+        if(messaggio.contains("|"))
+            return "E";
+
+        LocalTime orario=LocalTime.now();
+        String nomeUtente=cercaUtente(idMittente);
+
+        if(nomeUtente=="")
+            return "E";
+
+        listaMessaggiInoltrati.add(new Messaggio(messaggio,orario,nomeUtente));
+
+        return "M";
     }
 
     private static String registraUtente(String nomeUtente) throws Exception
@@ -88,5 +109,16 @@ public class Server
         }
 
         return id;
+    }
+
+    private static String cercaUtente(String id)
+    {
+        for(int i=0; i<listaUtentiCollegati.size(); i++)
+        {
+            if(id.equals(listaUtentiCollegati.get(i).IDUtente))
+                return listaUtentiCollegati.get(i).getNomeUtente();
+        }
+
+        return "";
     }
 }

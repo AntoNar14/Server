@@ -1,22 +1,22 @@
-import java.time.Clock;
+import java.time.LocalTime;
 
 public class Messaggio
 {
     String testo;
-    Clock orario;
+    LocalTime orario;
     String nomeUtente;
-    public Messaggio(String testo, Clock orario, String nomeUtente)
+    public Messaggio(String testo, LocalTime orario, String nomeUtente)
     {
         this.testo = testo;
         this.orario = orario;
         this.nomeUtente = nomeUtente;
     }
 
-    public Clock getOrario()
+    public LocalTime getOrario()
     {
         return orario;
     }
-    public void setOrario(Clock orario)
+    public void setOrario(LocalTime orario)
     {
         this.orario = orario;
     }
