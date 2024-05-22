@@ -4,10 +4,12 @@ public class Utente
 {
     String nomeUtente;
     String IDUtente;
-    public Utente(String nomeUtente, String IDUtente)
+    int ultimoMessaggioInviato;
+    public Utente(String nomeUtente, String IDUtente, int ultimoMessaggioInviato)
     {
         this.nomeUtente = nomeUtente;
         this.IDUtente = IDUtente;
+        this.ultimoMessaggioInviato=ultimoMessaggioInviato;
     }
     public String getIDUtente()
     {

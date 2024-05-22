@@ -1,10 +1,12 @@
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Messaggio
 {
     String testo;
     LocalTime orario;
     String nomeUtente;
+
     public Messaggio(String testo, LocalTime orario, String nomeUtente)
     {
         this.testo = testo;
@@ -38,7 +40,9 @@ public class Messaggio
     }
     public String toString()
     {
-        return (nomeUtente+"|"+testo+"|"+orario);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String orarioFormattato=orario.format(formatter);
+        return (nomeUtente+"|"+testo+"|"+orarioFormattato);
     }
 
 }
