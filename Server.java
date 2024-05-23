@@ -14,27 +14,31 @@ public class Server {
         try {
             ss = new ServerSocket(55555);
             try {
-                Socket client = ss.accept();
-                System.out.println("Accettata connessione da: " + client.getRemoteSocketAddress().toString());
-                BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-                // Lettura richiesta dal client
-                String str = in.readLine();
-                String richiesta = "";
-                String informazioni = "";
-                if (str != null && str.length() > 1) {
-                    richiesta=str.substring(0, 1);
-                    informazioni=str.substring(1);
+                while(true)
+                {
+                    Socket client = ss.accept();
+                    System.out.println("Accettata connessione da: " + client.getRemoteSocketAddress().toString());
+                    BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+                    // Lettura richiesta dal client
+                    String str = in.readLine();
+                    String richiesta = "";
+                    String informazioni = "";
+                    if (str != null && str.length() > 1) {
+                        richiesta=str.substring(0, 1);
+                        informazioni=str.substring(1);
+                    }
+
+                    String risposta = elaborazione(richiesta, informazioni);
+                    //trasmissione risposta del server
+                    out.write(risposta);
+                    out.flush();
+                    // chiusura connessione
+                    client.close();
+                    in.close();
+                    out.close();
                 }
 
-                String risposta = elaborazione(richiesta, informazioni);
-                //trasmissione risposta del server
-                out.write(risposta);
-                out.flush();
-                // chiusura connessione
-                client.close();
-                in.close();
-                out.close();
             } catch (Exception e) {
                 System.out.println("COMUNICAZIONE FALLITA!\nErrore: " +
                         e.getMessage());
