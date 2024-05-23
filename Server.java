@@ -4,6 +4,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/* Programma realizzato a scopi didattici da:
+    Antonio Nardella
+    Giacomo Pio Vigilante
+    Francesco Pio Colombino
+    A.S. 2023/2024
+ */
 public class Server {
     // Variabili globali del server necessarie ad elaborare la risposta
     static ArrayList<Utente> listaUtentiCollegati = new ArrayList<Utente>();
